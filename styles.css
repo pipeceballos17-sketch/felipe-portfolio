@@ -25,10 +25,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background-color: var(--bg);
   background-image: var(--noise-bg);
   background-repeat: repeat;
@@ -351,7 +353,7 @@ ul {
   justify-content: center;
   text-align: center;
   min-height: calc(100svh - 90px);
-  padding: clamp(40px, 6vw, 80px) 24px clamp(70px, 10vw, 130px);
+  padding: clamp(40px, 6vw, 80px) 24px clamp(40px, 6vw, 80px);
   gap: clamp(32px, 5vw, 56px);
 }
 
@@ -585,7 +587,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 28px;
 }
 
 .cta__button {
@@ -1476,6 +1478,16 @@ ul {
 
   .nav__start {
     order: 1;
+  }
+
+  /* "Ask my agent" is a desktop-only balance detail (see .nav__end) — on
+     mobile there's no side-by-side row to balance, and its label (especially
+     the Spanish "Preguntale a mi agente") was wide enough to overflow this
+     row entirely, pushing .nav__end off-screen and making the WHOLE PAGE
+     horizontally scrollable. The agent section is still reachable by
+     scrolling normally. */
+  .nav__agent {
+    display: none;
   }
 
   .nav__end {
