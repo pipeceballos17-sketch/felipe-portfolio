@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felipe Ceballos — Product Designer</title>
+  <meta name="description" content="Felipe Ceballos — Product designer from Bogotá, Colombia. I design it, I build it with AI, and I look at the numbers after." />
+  <meta property="og:title" content="Felipe Ceballos — Product Designer" />
+  <meta property="og:description" content="I design it, I build it with AI, and I look at the numbers after. Product designer from Bogotá, Colombia." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/work-card-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__start">
+      <a class="nav__logo brand-logo" href="#top" aria-label="Home">
+        <img src="assets/logo.svg" alt="Felipe Ceballos logo" width="56" height="46" />
+        <span class="brand-logo__lid" aria-hidden="true"></span>
+      </a>
+      <a class="nav__agent glass" href="#agent" id="navAgentBtn" data-i18n="nav.agent">Ask my agent</a>
+    </div>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about" data-i18n="nav.about">About me</a>
+      <a href="#work" data-i18n="nav.work">My Work</a>
+    </nav>
+    <div class="nav__end">
+      <div class="lang-switch glass" id="langSwitch" role="group" aria-label="Language">
+        <button type="button" class="lang-switch__btn is-active" data-lang="en">EN</button>
+        <button type="button" class="lang-switch__btn" data-lang="es">ES</button>
+        <span class="lang-switch__thumb" aria-hidden="true"></span>
+      </div>
+      <a class="nav__cta" href="#contact" id="navContactBtn" data-i18n="nav.cta">Let's talk</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="photo-stack" aria-hidden="false">
+        <div class="photo-stack__layer photo-stack__layer--1">
+          <div class="photo-stack__bg"></div>
+        </div>
+        <div class="photo-stack__layer photo-stack__layer--2">
+          <div class="photo-stack__bg"></div>
+        </div>
+        <div class="photo-stack__layer photo-stack__layer--3">
+          <div class="photo-stack__bg"></div>
+        </div>
+        <img
+          class="photo-stack__photo photo-stack__photo--desktop"
+          src="assets/profile-photo-card-desktop.png"
+          width="420"
+          height="429"
+          alt="Felipe Ceballos"
+        />
+        <img
+          class="photo-stack__photo photo-stack__photo--mobile"
+          src="assets/profile-photo-card-mobile.png"
+          width="261"
+          height="265"
+          alt="Felipe Ceballos"
+        />
+      </div>
+
+      <div class="social-callout">
+        <div class="social-callout__note" aria-hidden="true">
+          <span class="social-callout__text" data-i18n="social.checkMySocials">Check my socials</span>
+          <img class="social-callout__arrow" src="assets/arrow-doodle.svg" alt="" />
+        </div>
+
+        <ul class="social-pill glass">
+          <li><a href="#" aria-label="Photos"><img src="assets/icon-photos.png" alt="" /></a></li>
+          <li><a href="https://www.linkedin.com/in/felipe-ceballos-6415481a9/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="assets/icon-linkedin.svg" alt="" /></a></li>
+          <li><a href="#" aria-label="GitHub"><img src="assets/icon-github.svg" alt="" /></a></li>
+          <li><a href="#" aria-label="Instagram"><img src="assets/icon-instagram.svg" alt="" /></a></li>
+        </ul>
+      </div>
+
+      <h1 class="hero__title">
+        <span class="hero__title-wave" data-i18n="hero.greeting">Hi!</span><span data-i18n="hero.titleRest"> I'm Felipe, a product builder &amp; designer</span>
+      </h1>
+
+      <p class="hero__bio" data-i18n="hero.bio">
+        I design it, I build it with AI, and I look at the numbers after. Product designer from Bogotá, Colombia
+      </p>
+
+      <div class="cta">
+        <a class="cta__button" href="#work" data-i18n="hero.cta">See the work</a>
+        <a class="cta__arrow glass" href="#work" aria-label="Scroll to work">
+          <img src="assets/arrow-line.svg" alt="" />
+        </a>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="about__intro" data-reveal="up">
+        <span class="about__eyebrow" data-i18n="about.eyebrow">About</span>
+        <h2 class="about__heading" data-i18n="about.heading">Design, built and measured.</h2>
+        <p class="about__bio" data-i18n="about.bio1">
+          I'm Felipe, a product designer based in Bogotá, Colombia. I like owning the whole loop — from the first
+          sketch in Figma to the shipped interface, and then back into the data to see if it actually worked.
+        </p>
+        <p class="about__bio" data-i18n="about.bio2">
+          AI is part of how I work, not just what I design. I use it to move faster from idea to working product —
+          prototyping, building, and automating the parts that used to take days — so I can spend more time on the
+          decisions that actually need a human.
+        </p>
+      </div>
+
+      <div class="about__skills">
+        <div class="about__skill-group" data-reveal="up">
+          <h3 data-i18n="about.group.design">Product design</h3>
+          <ul class="about__tags">
+            <li class="glass" data-i18n="about.tag.figma">Figma</li>
+            <li class="glass" data-i18n="about.tag.prototyping">Prototyping</li>
+            <li class="glass" data-i18n="about.tag.designSystems">Design systems</li>
+          </ul>
+        </div>
+        <div class="about__skill-group" data-reveal="up">
+          <h3 data-i18n="about.group.branding">Branding</h3>
+          <ul class="about__tags">
+            <li class="glass" data-i18n="about.tag.visualIdentity">Visual identity</li>
+            <li class="glass" data-i18n="about.tag.brandStrategy">Brand strategy</li>
+            <li class="glass" data-i18n="about.tag.artDirection">Art direction</li>
+          </ul>
+        </div>
+        <div class="about__skill-group" data-reveal="up">
+          <h3 data-i18n="about.group.build">Build</h3>
+          <ul class="about__tags">
+            <li class="glass" data-i18n="about.tag.aiDev">AI-assisted dev</li>
+            <li class="glass">HTML / CSS / JS</li>
+            <li class="glass" data-i18n="about.tag.rapidPrototyping">Rapid prototyping</li>
+          </ul>
+        </div>
+        <div class="about__skill-group" data-reveal="up">
+          <h3 data-i18n="about.group.data">Data &amp; automation</h3>
+          <ul class="about__tags">
+            <li class="glass" data-i18n="about.tag.dashboards">Dashboards</li>
+            <li class="glass" data-i18n="about.tag.analytics">Analytics</li>
+            <li class="glass" data-i18n="about.tag.aiAgents">AI agents</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="work-stage" data-reveal="fade">
+      <div class="work" id="workCards">
+        <div class="work__card work__card--photo">
+          <img src="assets/work-card-1.png" alt="Gota Fría mezcal product photography" />
+          <div class="work__card-overlay">
+            <span class="work__card-overlay__eyebrow" data-i18n="work.card1.eyebrow">Branding</span>
+            <span class="work__card-overlay__title">Gota Fría</span>
+          </div>
+        </div>
+        <div class="work__card work__card--photo work__card--phone">
+          <img src="assets/work-card-2.png" alt="Comped app screen, product design" />
+          <div class="work__card-overlay">
+            <span class="work__card-overlay__eyebrow" data-i18n="work.card2.eyebrow">Product design</span>
+            <span class="work__card-overlay__title">Comped</span>
+          </div>
+        </div>
+        <div class="work__card work__card--photo work__card--phone">
+          <img src="assets/work-card-3.png" alt="Glubuddy app screen, brand and mascot design" />
+          <div class="work__card-overlay">
+            <span class="work__card-overlay__eyebrow" data-i18n="work.card3.eyebrow">Branding</span>
+            <span class="work__card-overlay__title">Glubuddy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="agent" class="agent">
+      <p class="agent__heading" data-reveal="up" data-i18n="agent.heading">Or... Ask my agent anything about me</p>
+
+      <div class="agent-chat" id="agentChat" data-reveal="up">
+        <input type="file" id="agentChatFile" accept="image/*" multiple hidden />
+
+        <div class="agent-chat__attachments" id="agentChatAttachments" hidden></div>
+
+        <div class="agent-chat__card" id="agentChatCard">
+          <button type="button" class="agent-chat__placeholder" id="agentChatPlaceholder" data-i18n="agent.placeholder">
+            Ask anything about me…
+          </button>
+
+          <textarea
+            class="agent-chat__textarea"
+            id="agentChatTextarea"
+            rows="1"
+            placeholder="Ask anything about me…"
+            aria-label="Ask my agent anything about Felipe"
+            data-i18n-placeholder="agent.placeholder"
+          ></textarea>
+
+          <div class="agent-chat__toolbar" id="agentChatToolbar">
+            <button type="button" class="agent-chat__pill" id="agentChatEffortBtn">
+              <span class="agent-chat__bars" id="agentChatBars" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span id="agentChatEffortLabel">Balanced</span>
+            </button>
+
+            <button type="button" class="agent-chat__icon-btn agent-chat__attach" id="agentChatAttachBtn" aria-label="Attach an image">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 2.5V11.5M2.5 7H11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+            </button>
+          </div>
+
+          <button type="button" class="agent-chat__send" id="agentChatSend" aria-label="Send message">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 12V2M7 2L2.5 6.5M7 2L11.5 6.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+        </div>
+
+        <div class="agent-chat__suggestions" id="agentChatSuggestions">
+          <button type="button" class="agent-chat__chip" data-i18n="agent.chip1">What tools do you use?</button>
+          <button type="button" class="agent-chat__chip" data-i18n="agent.chip2">Where are you based?</button>
+          <button type="button" class="agent-chat__chip" data-i18n="agent.chip3">What's your design process?</button>
+          <button type="button" class="agent-chat__chip" data-i18n="agent.chip4">How does AI fit into your work?</button>
+        </div>
+
+        <p class="agent-chat__note" id="agentChatNote" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact" data-reveal="fade">
+    <span class="footer__eyebrow" data-i18n="footer.eyebrow">Get in touch</span>
+    <p class="footer__tagline" data-i18n="footer.tagline">Design it. Build it. Measure it. Repeat.</p>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="contact-form__row">
+        <label class="contact-form__field">
+          <span data-i18n="contact.name">Name</span>
+          <input type="text" id="contactName" name="name" autocomplete="name" required />
+        </label>
+        <label class="contact-form__field">
+          <span data-i18n="contact.email">Email</span>
+          <input type="email" id="contactEmail" name="email" autocomplete="email" required />
+        </label>
+      </div>
+      <label class="contact-form__field">
+        <span data-i18n="contact.message">Message</span>
+        <textarea id="contactMessage" name="message" rows="4" required></textarea>
+      </label>
+      <button type="submit" class="contact-form__submit" data-i18n="contact.submit">Send message</button>
+      <p class="contact-form__note" id="contactFormNote" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="footer__top">
+      <a class="footer__logo brand-logo" href="#top" aria-label="Home">
+        <img src="assets/logo.svg" alt="Felipe Ceballos logo" width="40" height="33" />
+        <span class="brand-logo__lid" aria-hidden="true"></span>
+      </a>
+
+      <ul class="footer__social">
+        <li><a href="https://www.linkedin.com/in/felipe-ceballos-6415481a9/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="assets/icon-linkedin.svg" alt="" /></a></li>
+        <li><a href="#" aria-label="GitHub"><img src="assets/icon-github.svg" alt="" /></a></li>
+        <li><a href="#" aria-label="Instagram"><img src="assets/icon-instagram.svg" alt="" /></a></li>
+      </ul>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© <span id="footerYear"></span> Felipe Ceballos. <span data-i18n="footer.rights">All rights reserved.</span></p>
+
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#about" data-i18n="nav.about">About me</a>
+        <a href="#work" data-i18n="nav.work">My Work</a>
+        <a href="#contact" data-i18n="nav.cta">Let's talk</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+  <script src="nav-collapse.js"></script>
+  <script src="contact-form.js"></script>
+  <script src="hero-parallax.js"></script>
+  <script src="magnetic-buttons.js"></script>
+  <script src="work-stack.js"></script>
+  <script src="agent-chat.js"></script>
+  <script src="scroll-reveal.js"></script>
+  <script src="easter-egg.js"></script>
+  <script src="photo-stack-shuffle.js"></script>
+  <script src="logo-blink.js"></script>
+</body>
+</html>

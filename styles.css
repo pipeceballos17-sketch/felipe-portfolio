@@ -1,0 +1,1497 @@
+:root {
+  --bg: #000000;
+  --white: #ffffff;
+  --pill: rgba(217, 217, 217, 0.3);
+  --placeholder: #d9d9d9;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-button: "Poppins", var(--font-body);
+  /* Matches the subtle film-grain "Noise" layer effect on the Figma frame's
+     background, which doesn't come through in the design-to-code export. */
+  --noise-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.19 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Lets --shuffle-rot (used by photo-stack-shuffle.js) transition smoothly as
+   an angle instead of snapping instantly — unsupported browsers just snap,
+   which is a fine fallback for a purely decorative flourish. */
+@property --shuffle-rot {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: var(--noise-bg);
+  background-repeat: repeat;
+  color: var(--white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Glassmorphism — used by the social icon pill and the round CTA arrow button */
+.glass {
+  background: var(--pill);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 6px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgba(217, 217, 217, 0.55);
+  }
+}
+
+/* ---------- Nav ---------- */
+/* Collapses into a smaller floating pill on scroll (nav-collapse.js toggles
+   .nav--collapsed past a scroll threshold) — same content and same grid
+   template throughout, only size/shape/background change, so navigation
+   never disappears. Deliberately animates `width` (100% -> a definite
+   length) rather than `max-width: none -> fit-content`: `none`/`fit-content`
+   aren't real animatable values (browsers just snap them), where a
+   percentage and a length both are. Also deliberately never touches
+   grid-template-columns between states — changing the column template
+   itself can't transition and would make the whole shape snap instead of
+   morph, even while other properties keep animating smoothly. */
+.nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: clamp(16px, 3vw, 40px);
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 21px clamp(20px, 4vw, 36px);
+  border-radius: 0;
+  position: sticky;
+  top: 0;
+  background-color: var(--bg);
+  background-image: var(--noise-bg);
+  background-repeat: repeat;
+  box-shadow: none;
+  z-index: 50;
+  transition:
+    width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    margin 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    padding 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    column-gap 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    border-radius 0.4s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.nav--collapsed {
+  width: min(92vw, 640px);
+  column-gap: clamp(10px, 1.6vw, 20px);
+  margin: 12px auto 0;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+.nav--collapsed .nav__links {
+  gap: clamp(16px, 2.2vw, 30px);
+}
+
+.nav--collapsed .nav__links a {
+  font-size: 14px;
+}
+
+.nav--collapsed .nav__end {
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+.nav--collapsed .nav__cta {
+  padding: 7px 16px;
+  font-size: 13px;
+}
+
+.nav--collapsed .lang-switch__btn {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
+.nav--collapsed .nav__logo img {
+  height: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: none;
+  }
+}
+
+.nav__start {
+  grid-column: 1;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 18px);
+  transition: gap 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav__logo {
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+/* Balances the lang-switch + CTA pair on the right side of the header. */
+.nav__agent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--font-button);
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 500;
+  padding: 9px clamp(14px, 1.6vw, 20px);
+  border-radius: 999px;
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition:
+    transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    padding 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    font-size 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav__agent:hover,
+.nav__agent:focus-visible {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
+}
+
+.nav--collapsed .nav__start {
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+.nav--collapsed .nav__agent {
+  padding: 7px 14px;
+  font-size: 12px;
+}
+
+.nav__logo img {
+  height: clamp(30px, 3vw, 40px);
+  width: auto;
+  transition: height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Shared by the nav and footer logo — a plain-color overlay that "blinks"
+   over the logo's eye mark on click (logo-blink.js). Simpler and safer than
+   inlining/animating the SVG's own paths: the eye is solid white on the dark
+   nav/footer background, so a bar sweeping over it reads as an eyelid
+   closing without touching the image itself at all. */
+.brand-logo {
+  position: relative;
+}
+
+.brand-logo__lid {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  transform: scaleY(0);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.brand-logo__lid.is-blinking {
+  animation: brand-logo-blink 0.42s ease-in-out;
+}
+
+@keyframes brand-logo-blink {
+  0% {
+    transform: scaleY(0);
+  }
+  45% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+.nav__links {
+  grid-column: 2;
+  display: flex;
+  gap: clamp(28px, 4vw, 56px);
+  transition: gap 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav__links a {
+  text-decoration: none;
+  font-size: clamp(16px, 1.6vw, 24px);
+  white-space: nowrap;
+  transition: opacity 0.2s ease, font-size 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav__links a:hover,
+.nav__links a:focus-visible {
+  opacity: 0.7;
+}
+
+.nav__end {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 18px);
+  transition: gap 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lang-switch {
+  position: relative;
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+}
+
+.lang-switch__btn {
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-button);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.25s ease, padding 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), font-size 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lang-switch__btn.is-active {
+  color: #000;
+}
+
+.lang-switch__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
+  border-radius: 999px;
+  background: var(--white);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 0;
+}
+
+.lang-switch[data-active="es"] .lang-switch__thumb {
+  transform: translateX(100%);
+}
+
+/* --mx/--my are written by magnetic-buttons.js — the element leans toward
+   the cursor when it's nearby. Composed with (not replacing) the hover/active
+   transforms below so both effects work together. */
+.nav__cta {
+  background: var(--white);
+  color: #000;
+  font-family: var(--font-button);
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 10px clamp(18px, 2vw, 26px);
+  border-radius: 999px;
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition:
+    transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.25s ease,
+    padding 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    font-size 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav__cta:hover,
+.nav__cta:focus-visible {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.18);
+}
+
+.nav__cta:active {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) scale(0.97);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: calc(100svh - 90px);
+  padding: clamp(40px, 6vw, 80px) 24px clamp(70px, 10vw, 130px);
+  gap: clamp(32px, 5vw, 56px);
+}
+
+/* Fixed pixel sizes (not vw-based) on purpose: the photo is a pre-rotated
+   bitmap (assets/profile-photo-card-*.png — rotation baked into the pixels,
+   see the long comment on .photo-stack__photo below) that must render at
+   EXACTLY its native pixel size. Any CSS-driven scaling of it — even a
+   fraction of a percent from a non-round vw value — corrupts the rendering
+   in this exact page (rotated raster + sibling CSS transforms elsewhere).
+   Upscaling on high-DPI displays is fine; only downscaling breaks it, so a
+   fixed size matching the source PNG exactly is the only safe option. */
+.photo-stack {
+  position: relative;
+  width: 420px;
+  height: 429px;
+  margin: 12px 0 8px;
+  transition: opacity 0.15s linear;
+}
+
+@media (max-width: 480px) {
+  .photo-stack {
+    width: 261px;
+    height: 265px;
+  }
+}
+
+/* All 3 cards share one center point (concentric) — only their rotation differs. */
+.photo-stack__layer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 81.07%;
+  height: 82.1%;
+}
+
+/* --px/--py are written by hero-parallax.js (mouse + scroll depth offset).
+   Safe to animate here since these layers are flat color, not images — this
+   is not the transform+image combination that triggers the Chrome bug.
+   Rotation deliberately lives one level down, on .photo-stack__bg, not here —
+   see that rule below for why (photo-stack-shuffle.js needs to transition
+   rotation without ever putting a CSS transition on the parallax translate,
+   which is updated every rAF frame and would otherwise lag behind the cursor). */
+.photo-stack__layer--1 {
+  transform: translate(calc(-50% + var(--px, 0px)), calc(-50% + var(--py, 0px)));
+  z-index: 1;
+}
+
+.photo-stack__layer--2 {
+  transform: translate(calc(-50% + var(--px, 0px)), calc(-50% + var(--py, 0px)));
+  z-index: 2;
+}
+
+.photo-stack__layer--3 {
+  transform: translate(calc(-50% + var(--px, 0px)), calc(-50% + var(--py, 0px)));
+  z-index: 3;
+}
+
+/* Rotation (base angle + --shuffle-rot, written by photo-stack-shuffle.js on
+   click) lives here, one level below the parallax translate above, so the
+   click-to-shuffle transition can animate transform on this element only —
+   the parent's translate never gets a transition and stays perfectly synced
+   to the mouse every frame. */
+.photo-stack__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--placeholder);
+  transition: transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.photo-stack__layer--1 .photo-stack__bg {
+  transform: rotate(calc(0deg + var(--shuffle-rot, 0deg)));
+}
+
+.photo-stack__layer--2 .photo-stack__bg {
+  transform: rotate(calc(5.44deg + var(--shuffle-rot, 0deg)));
+}
+
+.photo-stack__layer--3 .photo-stack__bg {
+  transform: rotate(calc(-15.08deg + var(--shuffle-rot, 0deg)));
+}
+
+.photo-stack--shufflable {
+  cursor: pointer;
+}
+
+/* Plain <img>, rotation baked into the pixels (see assets/profile-photo-card-*.png
+   generation notes in project memory). This page has a confirmed, severe
+   Chrome rendering bug affecting ANY rotated-raster-content technique — CSS
+   transform:rotate() on an image, an SVG <image> smaller than its own
+   viewBox, an SVG <image>+<rect> pair, an SVG evenodd "frame" mask — every
+   one of them corrupts (black holes / clipped edges) as soon as ANY sibling
+   element elsewhere also has a CSS transform, which .photo-stack__layer--1/2/3
+   always do. The only configuration that survived rigorous pixel-level
+   verification (not just eyeballing a screenshot): a plain <img>, rotation
+   pre-baked into the bitmap, displayed at EXACTLY its native pixel size with
+   zero CSS scaling in either direction. Do not reintroduce SVG or
+   transform:rotate() here without re-verifying with the pixel-scan method in
+   project memory, not just a visual screenshot check — this bug is very good
+   at looking fine in a screenshot while still having internal corruption. */
+.photo-stack__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.photo-stack__photo--mobile {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .photo-stack__photo--desktop {
+    display: none;
+  }
+
+  .photo-stack__photo--mobile {
+    display: block;
+  }
+}
+
+.social-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2.4vw, 26px);
+  padding: 14px clamp(20px, 3vw, 32px);
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.social-pill a {
+  display: block;
+  line-height: 0;
+  border-radius: 50%;
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease;
+}
+
+.social-pill a:hover,
+.social-pill a:focus-visible {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-6px) scale(1.12);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.social-pill a:active {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px) scale(1.02);
+  transition-duration: 0.1s;
+}
+
+.social-pill img {
+  width: clamp(34px, 4vw, 56px);
+  height: clamp(34px, 4vw, 56px);
+  object-fit: contain;
+  transition: filter 0.25s ease;
+}
+
+.social-pill a:hover img,
+.social-pill a:focus-visible img {
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+}
+
+.social-callout {
+  position: relative;
+}
+
+.social-callout__note {
+  position: absolute;
+  right: 100%;
+  bottom: 42px;
+  margin-right: clamp(16px, 2.4vw, 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.social-callout__text {
+  font-family: "Just Me Again Down Here", cursive;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1;
+  color: var(--white);
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.social-callout__arrow {
+  width: clamp(140px, 16vw, 220px);
+  height: auto;
+  margin-top: 14px;
+}
+
+@media (max-width: 760px) {
+  .social-callout__note {
+    display: none;
+  }
+}
+
+.hero__title {
+  font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.15;
+  max-width: 920px;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* The "Hi!" greeting keeps the site's one handwritten accent font — everything
+   else in the title stays in the clean type family. Sized up relative to its
+   own line (script faces read smaller than body type at the same font-size)
+   and nudged down slightly to sit on the same baseline as the rest. */
+.hero__title-wave {
+  font-family: "Just Me Again Down Here", cursive;
+  font-size: 1.35em;
+  font-weight: 400;
+  display: inline-block;
+  transform: translateY(0.08em);
+  margin-right: 0.08em;
+}
+
+.hero__bio {
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.35;
+  max-width: 780px;
+  margin: 0;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.cta__button {
+  background: var(--white);
+  color: #000;
+  font-family: var(--font-button);
+  font-size: clamp(16px, 1.6vw, 24px);
+  padding: 14px clamp(24px, 3vw, 36px);
+  border-radius: 35px;
+  text-decoration: none;
+  white-space: nowrap;
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform 0.2s ease;
+}
+
+.cta__button:hover,
+.cta__button:focus-visible {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
+}
+
+.cta__arrow {
+  width: 58px;
+  height: 57px;
+  min-width: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform 0.2s ease;
+}
+
+.cta__arrow:hover,
+.cta__arrow:focus-visible {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) translateX(3px);
+}
+
+.cta__arrow img {
+  width: 20px;
+  height: auto;
+}
+
+/* ---------- About ---------- */
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(40px, 6vw, 100px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(60px, 10vw, 140px) 24px;
+  align-items: start;
+  text-align: left;
+}
+
+.about__eyebrow {
+  display: inline-block;
+  font-family: var(--font-button);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 14px;
+}
+
+.about__heading {
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 24px;
+}
+
+.about__bio {
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 54ch;
+  margin: 0 0 20px;
+}
+
+.about__bio:last-child {
+  margin-bottom: 0;
+}
+
+.about__skills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(28px, 3vw, 40px) clamp(20px, 2.6vw, 32px);
+}
+
+.about__skill-group h3 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 14px;
+}
+
+.about__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about__tags li {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.about__tags li:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 860px) {
+  .about {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .about__skills {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Work ---------- */
+/* Base: plain static grid. Works with no JS, on touch devices, and with reduced motion. */
+.work {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 60px);
+  max-width: 1323px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 100px) 24px;
+}
+
+.work__card {
+  position: relative;
+  background: var(--white);
+  border-radius: 30px;
+  aspect-ratio: 401 / 551;
+  overflow: hidden;
+}
+
+.work__card--photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* The source photo has a ~2px transparent anti-aliased edge baked in, which
+     let the card's white background show through as a thin fringe. Scaling
+     up slightly pushes that transparent edge outside the clipped card — the
+     hover state below must never scale below this or the fringe reappears. */
+  transform: scale(1.04);
+}
+
+.work__card--photo:hover img,
+.work__card--photo:focus-within img {
+  transform: scale(1.1);
+}
+
+/* This card's own aspect-ratio is overridden to match the iPhone screenshot
+   exactly (393:852), so the image fills it edge-to-edge with no letterboxing —
+   different height than its sibling cards on purpose (matches the reference). */
+.work__card--phone {
+  aspect-ratio: 393 / 852;
+}
+
+.work__card--phone img {
+  transform: none;
+}
+
+.work__card--phone:hover img,
+.work__card--phone:focus-within img {
+  transform: scale(1.04);
+}
+
+.work__card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(18px, 2.4vw, 26px);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.32) 42%, transparent 75%);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+}
+
+.work__card--photo:hover .work__card-overlay,
+.work__card--photo:focus-within .work__card-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work__card-overlay__eyebrow {
+  font-family: var(--font-button);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 6px;
+}
+
+.work__card-overlay__title {
+  font-size: clamp(20px, 2.2vw, 27px);
+  color: var(--white);
+  font-weight: 400;
+}
+
+/* Progressive enhancement: scroll-scrubbed stack -> spread reveal.
+   work-stack.js only adds this class on pointer devices without reduced-motion. */
+.work-stage.work-stage--animated {
+  height: 260vh;
+  /* .work loses all its own padding below (it becomes a full-viewport sticky
+     panel), so without this the pinned cards would butt straight up against
+     whatever comes next the instant the pin releases. */
+  margin-bottom: clamp(60px, 8vw, 120px);
+}
+
+.work-stage--animated .work {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: block;
+  overflow: hidden;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+.work-stage--animated .work__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(27vw, 340px);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  will-change: transform;
+}
+
+/* ---------- Agent ---------- */
+.agent {
+  text-align: center;
+  padding: clamp(70px, 9vw, 140px) 24px clamp(80px, 10vw, 160px);
+}
+
+.agent__heading {
+  font-size: clamp(20px, 2.6vw, 36px);
+  max-width: 581px;
+  margin: 0 auto clamp(28px, 4vw, 44px);
+  font-weight: 400;
+}
+
+/* ---------- Agent chat widget (vanilla JS port of a React/shadcn component) ---------- */
+.agent-chat {
+  --chat-fg: #111111;
+  --chat-muted: #8a8a92;
+  --chat-muted-bg: #f4f4f5;
+  --chat-border: #e5e5ea;
+  --chat-ring: rgba(0, 0, 0, 0.12);
+  --chat-accent: #f2f2f4;
+  --agent-chat-height: 116px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.agent-chat__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  max-width: 560px;
+}
+
+.agent-chat__chip {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease, border-color 0.2s ease;
+}
+
+.agent-chat__chip:hover,
+.agent-chat__chip:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.agent-chat__attachments {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 680px;
+  padding: 0 10px 10px;
+  overflow-x: auto;
+}
+
+.agent-chat__thumb {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--chat-border);
+  background: var(--chat-muted-bg);
+  cursor: pointer;
+}
+
+.agent-chat__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.agent-chat__thumb button {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  font-size: 11px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.agent-chat__card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 58px;
+  margin: 0 auto;
+  border-radius: 28px;
+  background: var(--white);
+  border: 1px solid var(--chat-border);
+  color: var(--chat-fg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  text-align: left;
+  transition:
+    max-width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.agent-chat__card:focus-within {
+  border-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 3px var(--chat-ring);
+}
+
+.agent-chat__card.is-expanded {
+  max-width: 680px;
+  height: var(--agent-chat-height);
+  overflow: visible;
+}
+
+.agent-chat__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 56px 0 24px;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--chat-muted);
+  text-align: left;
+  cursor: text;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.agent-chat__card.is-expanded .agent-chat__placeholder {
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+}
+
+.agent-chat__textarea {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 88px;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--chat-fg);
+  padding: 18px 56px 18px 24px;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, height 0.2s ease-out;
+}
+
+.agent-chat__card.is-expanded .agent-chat__textarea {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.agent-chat__toolbar {
+  position: absolute;
+  left: 14px;
+  right: 54px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.agent-chat__card.is-expanded .agent-chat__toolbar {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.agent-chat__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--chat-muted);
+  font-family: var(--font-button);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.agent-chat__pill:hover {
+  background: var(--chat-accent);
+  color: var(--chat-fg);
+}
+
+.agent-chat__bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.agent-chat__bars i {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.25;
+}
+
+.agent-chat__bars i:nth-child(1) {
+  height: 6px;
+}
+
+.agent-chat__bars i:nth-child(2) {
+  height: 10px;
+}
+
+.agent-chat__bars i:nth-child(3) {
+  height: 14px;
+}
+
+.agent-chat__bars i.is-active {
+  opacity: 1;
+}
+
+.agent-chat__icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--chat-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.agent-chat__icon-btn:hover {
+  background: var(--chat-accent);
+  color: var(--chat-fg);
+}
+
+.agent-chat__attach {
+  margin-left: auto;
+}
+
+.agent-chat__send {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: none;
+  background: var(--chat-muted-bg);
+  color: var(--chat-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease, color 0.2s ease;
+  pointer-events: none;
+}
+
+.agent-chat__card.is-expanded .agent-chat__send {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.agent-chat__send.is-active {
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+.agent-chat__note {
+  min-height: 18px;
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 480px;
+}
+
+.agent-chat__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.agent-chat__modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.agent-chat__modal img {
+  max-width: min(86vw, 560px);
+  max-height: 78vh;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  transform: scale(0.92);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.agent-chat__modal.is-open img {
+  transform: scale(1);
+}
+
+.agent-chat__modal .close {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 36px) clamp(28px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 36px);
+}
+
+.footer__eyebrow {
+  display: block;
+  text-align: center;
+  font-family: var(--font-button);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 10px;
+}
+
+.footer__tagline {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-button);
+  font-size: clamp(15px, 1.6vw, 19px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-form {
+  width: 100%;
+  max-width: 480px;
+  margin: clamp(28px, 4vw, 40px) auto clamp(36px, 5vw, 56px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+.contact-form__row {
+  display: flex;
+  gap: 14px;
+}
+
+.contact-form__row .contact-form__field {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.contact-form__field input,
+.contact-form__field textarea {
+  font: inherit;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 10px 14px;
+  resize: vertical;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.contact-form__field input:focus,
+.contact-form__field textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.contact-form__submit {
+  align-self: flex-start;
+  background: var(--white);
+  color: #000;
+  font-family: var(--font-button);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transform: translate(var(--mx, 0px), var(--my, 0px));
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+}
+
+.contact-form__submit:hover,
+.contact-form__submit:focus-visible {
+  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.18);
+}
+
+.contact-form__note {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 480px) {
+  .contact-form__row {
+    flex-direction: column;
+  }
+}
+
+.footer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer__logo {
+  display: block;
+  line-height: 0;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.footer__logo:hover,
+.footer__logo:focus-visible {
+  opacity: 1;
+}
+
+.footer__logo img {
+  height: 32px;
+  width: auto;
+}
+
+.footer__social {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__social a {
+  display: block;
+  line-height: 0;
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.footer__social a:hover,
+.footer__social a:focus-visible {
+  transform: translateY(-4px) scale(1.1);
+}
+
+.footer__social img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: clamp(20px, 3vw, 28px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer__copy {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer__links {
+  display: flex;
+  gap: clamp(18px, 2vw, 32px);
+}
+
+.footer__links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer__links a:hover,
+.footer__links a:focus-visible {
+  color: var(--white);
+}
+
+@media (max-width: 560px) {
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Scroll reveal ---------- */
+/* scroll-reveal.js adds .is-visible via IntersectionObserver the first time
+   an element enters the viewport. Kept opacity-only ("fade") on anything that
+   already gets its own transform elsewhere (e.g. .work-stage, whose cards are
+   transformed by work-stack.js) so the two never fight over the property. */
+[data-reveal] {
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal="up"] {
+  transform: translateY(28px);
+}
+
+[data-reveal="fade"] {
+  transform: none;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about__skill-group:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.about__skill-group:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.about__skill-group:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.about__skill-group:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+.agent-chat[data-reveal] {
+  transition-delay: 0.1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .work {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 14px;
+  }
+
+  .nav__start {
+    order: 1;
+  }
+
+  .nav__end {
+    order: 2;
+  }
+
+  .nav__links {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .cta {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
