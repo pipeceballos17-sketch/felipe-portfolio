@@ -116,7 +116,16 @@
         <div class="about__skill-group" data-reveal="up">
           <h3 data-i18n="about.group.design">Product design</h3>
           <ul class="about__tags">
-            <li class="glass" data-i18n="about.tag.figma">Figma</li>
+            <li class="glass">
+              <svg class="about__tag-icon" viewBox="0 0 16 24" fill="currentColor" aria-hidden="true">
+                <path d="M0 4a4 4 0 0 1 4-4h4v8H4a4 4 0 0 1-4-4Z" />
+                <rect x="0" y="8" width="8" height="8" />
+                <path d="M0 20a4 4 0 0 1 4-4h4v8H4a4 4 0 0 1-4-4Z" />
+                <circle cx="12" cy="4" r="4" />
+                <circle cx="12" cy="20" r="4" />
+              </svg>
+              <span data-i18n="about.tag.figma">Figma</span>
+            </li>
             <li class="glass" data-i18n="about.tag.prototyping">Prototyping</li>
             <li class="glass" data-i18n="about.tag.designSystems">Design systems</li>
           </ul>
@@ -133,7 +142,13 @@
           <h3 data-i18n="about.group.build">Build</h3>
           <ul class="about__tags">
             <li class="glass" data-i18n="about.tag.aiDev">AI-assisted dev</li>
-            <li class="glass">HTML / CSS / JS</li>
+            <li class="glass">
+              <svg class="about__tag-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 4 1.5 8 5 12" />
+                <path d="M11 4l3.5 4-3.5 4" />
+              </svg>
+              <span>HTML / CSS / JS</span>
+            </li>
             <li class="glass" data-i18n="about.tag.rapidPrototyping">Rapid prototyping</li>
           </ul>
         </div>
@@ -150,11 +165,11 @@
 
     <section id="work" class="work-stage" data-reveal="fade">
       <div class="work" id="workCards">
-        <div class="work__card work__card--photo">
-          <img src="assets/work-card-1.png" alt="Gota Fría mezcal product photography" />
+        <div class="work__card work__card--photo work__card--phone">
+          <img src="assets/work-card-1.png" alt="Kipu app screen, product design" />
           <div class="work__card-overlay">
-            <span class="work__card-overlay__eyebrow" data-i18n="work.card1.eyebrow">Branding</span>
-            <span class="work__card-overlay__title">Gota Fría</span>
+            <span class="work__card-overlay__eyebrow" data-i18n="work.card1.eyebrow">Product design + Branding</span>
+            <span class="work__card-overlay__title">Kipu</span>
           </div>
         </div>
         <div class="work__card work__card--photo work__card--phone">

@@ -696,12 +696,25 @@ ul {
 }
 
 .about__tags li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 14px;
   font-weight: 500;
   color: var(--white);
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Only tags for actual tools with a real, recognizable mark get an icon
+   (Figma, code) — the rest are concepts/skills, not products, so a generic
+   icon there would look like filler rather than a real identity. */
+.about__tag-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 
 .about__tags li:hover {
