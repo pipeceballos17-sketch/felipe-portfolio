@@ -890,6 +890,62 @@ ul {
   will-change: transform;
 }
 
+/* ---------- Photos ---------- */
+/* Empty gray placeholders on purpose — no real photos exist yet (user is
+   still gathering them). Same "plain empty rounded container, no invented
+   content" pattern the work cards used before their real images existed. */
+.photos {
+  max-width: 1058px;
+  margin: 0 auto;
+  padding: clamp(32px, 4.8vw, 80px) 19px;
+  text-align: center;
+}
+
+.photos__intro {
+  margin-bottom: clamp(32px, 4.8vw, 64px);
+}
+
+.photos__eyebrow {
+  display: inline-block;
+  font-family: var(--font-button);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 11px;
+}
+
+.photos__heading {
+  font-size: clamp(22px, 2.72vw, 35px);
+  font-weight: 400;
+  margin: 0;
+}
+
+.photos__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.photos__item {
+  aspect-ratio: 1 / 1;
+  border-radius: 19px;
+  background: var(--placeholder);
+}
+
+@media (max-width: 760px) {
+  .photos__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .photos__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Agent ---------- */
 .agent {
   text-align: center;
