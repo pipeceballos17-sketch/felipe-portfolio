@@ -584,17 +584,29 @@ ul {
 .cta {
   display: flex;
   align-items: center;
-  gap: 16px;
   margin-top: 8px;
 }
 
-/* Gradient + noise grain from the Figma exploration (node 45:1268):
-   mauve -> dark slate -> coral, noise layered on top the same way the
-   page background/nav already do it (var(--noise-bg)), just stacked as a
-   second background-image instead of over a flat color. */
+/* Black pill with a gradient+noise BORDER (not a filled gradient) — matches
+   the Figma exploration (node 45:1268) once seen in context: mauve -> dark
+   slate -> coral, grain layered on top the same way the page background/nav
+   already do it (var(--noise-bg)). Classic CSS gradient-border technique:
+   three stacked background layers, the top one clipped to padding-box (solid
+   fill, hides the other two everywhere except the border ring) and the
+   other two clipped to border-box (only visible in that ring). */
 .cta__button {
-  background-image: var(--noise-bg), linear-gradient(90deg, rgb(144, 111, 111) 0%, rgb(66, 74, 97) 50%, rgb(252, 137, 113) 100%);
-  background-repeat: repeat, no-repeat;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(var(--bg), var(--bg)),
+    var(--noise-bg),
+    linear-gradient(90deg, rgb(144, 111, 111) 0%, rgb(66, 74, 97) 50%, rgb(252, 137, 113) 100%);
+  background-origin: padding-box, border-box, border-box;
+  background-clip: padding-box, border-box, border-box;
+  background-repeat: no-repeat, repeat, no-repeat;
   color: var(--white);
   font-family: var(--font-button);
   font-size: clamp(16px, 1.6vw, 24px);
@@ -611,27 +623,15 @@ ul {
   transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
 }
 
-.cta__arrow {
-  width: 58px;
-  height: 57px;
-  min-width: 58px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transform: translate(var(--mx, 0px), var(--my, 0px));
+.cta__button-arrow {
+  width: 20px;
+  height: auto;
   transition: transform 0.2s ease;
 }
 
-.cta__arrow:hover,
-.cta__arrow:focus-visible {
-  transform: translate(var(--mx, 0px), var(--my, 0px)) translateX(3px);
-}
-
-.cta__arrow img {
-  width: 20px;
-  height: auto;
+.cta__button:hover .cta__button-arrow,
+.cta__button:focus-visible .cta__button-arrow {
+  transform: translateX(3px);
 }
 
 /* ---------- About ---------- */
