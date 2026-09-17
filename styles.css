@@ -25,12 +25,10 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  overflow-x: hidden;
   background-color: var(--bg);
   background-image: var(--noise-bg);
   background-repeat: repeat;
@@ -353,7 +351,7 @@ ul {
   justify-content: center;
   text-align: center;
   min-height: calc(100svh - 90px);
-  padding: clamp(40px, 6vw, 80px) 24px clamp(40px, 6vw, 80px);
+  padding: clamp(40px, 6vw, 80px) 24px clamp(70px, 10vw, 130px);
   gap: clamp(32px, 5vw, 56px);
 }
 
@@ -587,7 +585,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 28px;
+  margin-top: 8px;
 }
 
 .cta__button {
@@ -638,7 +636,7 @@ ul {
   gap: clamp(40px, 6vw, 100px);
   max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(60px, 10vw, 140px) 24px;
+  padding: clamp(40px, 6vw, 80px) 24px clamp(60px, 10vw, 140px);
   align-items: start;
   text-align: left;
 }
