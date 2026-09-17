@@ -114,7 +114,7 @@ ul {
 .nav--collapsed {
   width: min(73.6vw, 512px);
   column-gap: clamp(8px, 1.28vw, 16px);
-  margin: 10px auto 0;
+  margin: 22px auto 0;
   padding: 8px 18px;
   border-radius: 999px;
   background-color: rgba(0, 0, 0, 0.6);
