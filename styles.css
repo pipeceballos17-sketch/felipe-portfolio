@@ -588,13 +588,18 @@ ul {
   margin-top: 8px;
 }
 
+/* Gradient + noise grain from the Figma exploration (node 45:1268):
+   mauve -> dark slate -> coral, noise layered on top the same way the
+   page background/nav already do it (var(--noise-bg)), just stacked as a
+   second background-image instead of over a flat color. */
 .cta__button {
-  background: var(--white);
-  color: #000;
+  background-image: var(--noise-bg), linear-gradient(90deg, rgb(144, 111, 111) 0%, rgb(66, 74, 97) 50%, rgb(252, 137, 113) 100%);
+  background-repeat: repeat, no-repeat;
+  color: var(--white);
   font-family: var(--font-button);
   font-size: clamp(16px, 1.6vw, 24px);
   padding: 14px clamp(24px, 3vw, 36px);
-  border-radius: 35px;
+  border-radius: 999px;
   text-decoration: none;
   white-space: nowrap;
   transform: translate(var(--mx, 0px), var(--my, 0px));
