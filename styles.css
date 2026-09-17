@@ -8,6 +8,10 @@
   /* Matches the subtle film-grain "Noise" layer effect on the Figma frame's
      background, which doesn't come through in the design-to-code export. */
   --noise-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.19 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Stronger grain, used only where noise itself is the point (the CTA
+     button's gradient border) — kept separate from --noise-bg so bumping it
+     doesn't also darken/lighten the page-wide body/nav grain. */
+  --noise-bg-strong: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 * {
@@ -599,14 +603,15 @@ ul {
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  border: 2px solid transparent;
+  border: 8px solid transparent;
   background-image:
     linear-gradient(var(--bg), var(--bg)),
-    var(--noise-bg),
+    var(--noise-bg-strong),
+    linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)),
     linear-gradient(90deg, rgb(144, 111, 111) 0%, rgb(66, 74, 97) 50%, rgb(252, 137, 113) 100%);
-  background-origin: padding-box, border-box, border-box;
-  background-clip: padding-box, border-box, border-box;
-  background-repeat: no-repeat, repeat, no-repeat;
+  background-origin: padding-box, border-box, border-box, border-box;
+  background-clip: padding-box, border-box, border-box, border-box;
+  background-repeat: no-repeat, repeat, no-repeat, no-repeat;
   color: var(--white);
   font-family: var(--font-button);
   font-size: clamp(16px, 1.6vw, 24px);
