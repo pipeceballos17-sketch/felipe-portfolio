@@ -59,13 +59,13 @@ ul {
 /* Glassmorphism — used by the social icon pill and the round CTA arrow button */
 .glass {
   background: var(--pill);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.2),
-    inset 0 -1px 6px rgba(0, 0, 0, 0.15),
-    0 8px 24px rgba(0, 0, 0, 0.35);
+    inset 0 -1px 5px rgba(0, 0, 0, 0.15),
+    0 6px 19px rgba(0, 0, 0, 0.35);
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -88,11 +88,11 @@ ul {
 .nav {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  column-gap: clamp(16px, 3vw, 40px);
+  column-gap: clamp(13px, 2.4vw, 32px);
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  padding: 21px clamp(20px, 4vw, 36px);
+  padding: 17px clamp(16px, 3.2vw, 29px);
   border-radius: 0;
   position: sticky;
   top: 0;
@@ -112,41 +112,41 @@ ul {
 }
 
 .nav--collapsed {
-  width: min(92vw, 640px);
-  column-gap: clamp(10px, 1.6vw, 20px);
-  margin: 12px auto 0;
-  padding: 10px 22px;
+  width: min(73.6vw, 512px);
+  column-gap: clamp(8px, 1.28vw, 16px);
+  margin: 10px auto 0;
+  padding: 8px 18px;
   border-radius: 999px;
   background-color: rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  backdrop-filter: blur(18px) saturate(140%);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 8px 27px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 
 .nav--collapsed .nav__links {
-  gap: clamp(16px, 2.2vw, 30px);
+  gap: clamp(13px, 1.76vw, 24px);
 }
 
 .nav--collapsed .nav__links a {
-  font-size: 14px;
-}
-
-.nav--collapsed .nav__end {
-  gap: clamp(8px, 1.2vw, 14px);
-}
-
-.nav--collapsed .nav__cta {
-  padding: 7px 16px;
-  font-size: 13px;
-}
-
-.nav--collapsed .lang-switch__btn {
-  padding: 5px 10px;
   font-size: 11px;
 }
 
+.nav--collapsed .nav__end {
+  gap: clamp(6px, 0.96vw, 11px);
+}
+
+.nav--collapsed .nav__cta {
+  padding: 6px 13px;
+  font-size: 10px;
+}
+
+.nav--collapsed .lang-switch__btn {
+  padding: 4px 8px;
+  font-size: 9px;
+}
+
 .nav--collapsed .nav__logo img {
-  height: 24px;
+  height: 19px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -160,7 +160,7 @@ ul {
   justify-self: start;
   display: flex;
   align-items: center;
-  gap: clamp(10px, 1.6vw, 18px);
+  gap: clamp(8px, 1.28vw, 14px);
   transition: gap 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -180,9 +180,9 @@ ul {
   color: var(--white);
   text-decoration: none;
   font-family: var(--font-button);
-  font-size: clamp(13px, 1.2vw, 15px);
+  font-size: clamp(10px, 0.96vw, 12px);
   font-weight: 500;
-  padding: 9px clamp(14px, 1.6vw, 20px);
+  padding: 7px clamp(11px, 1.28vw, 16px);
   border-radius: 999px;
   transform: translate(var(--mx, 0px), var(--my, 0px));
   transition:
@@ -197,16 +197,16 @@ ul {
 }
 
 .nav--collapsed .nav__start {
-  gap: clamp(8px, 1.2vw, 14px);
+  gap: clamp(6px, 0.96vw, 11px);
 }
 
 .nav--collapsed .nav__agent {
-  padding: 7px 14px;
-  font-size: 12px;
+  padding: 6px 11px;
+  font-size: 10px;
 }
 
 .nav__logo img {
-  height: clamp(30px, 3vw, 40px);
+  height: clamp(24px, 2.4vw, 32px);
   width: auto;
   transition: height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -248,13 +248,13 @@ ul {
 .nav__links {
   grid-column: 2;
   display: flex;
-  gap: clamp(28px, 4vw, 56px);
+  gap: clamp(22px, 3.2vw, 45px);
   transition: gap 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .nav__links a {
   text-decoration: none;
-  font-size: clamp(16px, 1.6vw, 24px);
+  font-size: clamp(13px, 1.28vw, 19px);
   white-space: nowrap;
   transition: opacity 0.2s ease, font-size 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -269,14 +269,14 @@ ul {
   justify-self: end;
   display: flex;
   align-items: center;
-  gap: clamp(10px, 1.6vw, 18px);
+  gap: clamp(8px, 1.28vw, 14px);
   transition: gap 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .lang-switch {
   position: relative;
   display: inline-flex;
-  padding: 3px;
+  padding: 2px;
   border-radius: 999px;
 }
 
@@ -287,10 +287,10 @@ ul {
   background: transparent;
   color: rgba(255, 255, 255, 0.65);
   font-family: var(--font-button);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 999px;
   cursor: pointer;
   transition: color 0.25s ease, padding 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), font-size 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -302,10 +302,10 @@ ul {
 
 .lang-switch__thumb {
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: calc(50% - 3px);
-  height: calc(100% - 6px);
+  top: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  height: calc(100% - 5px);
   border-radius: 999px;
   background: var(--white);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -323,11 +323,11 @@ ul {
   background: var(--white);
   color: #000;
   font-family: var(--font-button);
-  font-size: clamp(14px, 1.3vw, 18px);
+  font-size: clamp(11px, 1.04vw, 14px);
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
-  padding: 10px clamp(18px, 2vw, 26px);
+  padding: 8px clamp(14px, 1.6vw, 21px);
   border-radius: 999px;
   transform: translate(var(--mx, 0px), var(--my, 0px));
   transition:
@@ -340,7 +340,7 @@ ul {
 .nav__cta:hover,
 .nav__cta:focus-visible {
   transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.18);
 }
 
 .nav__cta:active {
@@ -354,9 +354,9 @@ ul {
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: calc(100svh - 90px);
-  padding: clamp(40px, 6vw, 80px) 24px clamp(70px, 10vw, 130px);
-  gap: clamp(32px, 5vw, 56px);
+  min-height: calc(100svh - 72px);
+  padding: clamp(32px, 4.8vw, 64px) 19px clamp(56px, 8vw, 104px);
+  gap: clamp(26px, 4vw, 45px);
 }
 
 /* Fixed pixel sizes (not vw-based) on purpose: the photo is a pre-rotated
@@ -371,7 +371,7 @@ ul {
   position: relative;
   width: 420px;
   height: 429px;
-  margin: 12px 0 8px;
+  margin: 10px 0 6px;
   transition: opacity 0.15s linear;
 }
 
@@ -482,8 +482,8 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(14px, 2.4vw, 26px);
-  padding: 14px clamp(20px, 3vw, 32px);
+  gap: clamp(11px, 1.92vw, 21px);
+  padding: 11px clamp(16px, 2.4vw, 26px);
   border-radius: 999px;
   width: fit-content;
 }
@@ -498,7 +498,7 @@ ul {
 
 .social-pill a:hover,
 .social-pill a:focus-visible {
-  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-6px) scale(1.12);
+  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-5px) scale(1.12);
   background: rgba(255, 255, 255, 0.14);
 }
 
@@ -508,15 +508,15 @@ ul {
 }
 
 .social-pill img {
-  width: clamp(34px, 4vw, 56px);
-  height: clamp(34px, 4vw, 56px);
+  width: clamp(27px, 3.2vw, 45px);
+  height: clamp(27px, 3.2vw, 45px);
   object-fit: contain;
   transition: filter 0.25s ease;
 }
 
 .social-pill a:hover img,
 .social-pill a:focus-visible img {
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 5px 11px rgba(0, 0, 0, 0.45));
 }
 
 .social-callout {
@@ -526,8 +526,8 @@ ul {
 .social-callout__note {
   position: absolute;
   right: 100%;
-  bottom: 42px;
-  margin-right: clamp(16px, 2.4vw, 32px);
+  bottom: 34px;
+  margin-right: clamp(13px, 1.92vw, 26px);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -536,7 +536,7 @@ ul {
 
 .social-callout__text {
   font-family: "Just Me Again Down Here", cursive;
-  font-size: clamp(28px, 3.2vw, 40px);
+  font-size: clamp(22px, 2.56vw, 32px);
   line-height: 1;
   color: var(--white);
   white-space: nowrap;
@@ -544,9 +544,9 @@ ul {
 }
 
 .social-callout__arrow {
-  width: clamp(140px, 16vw, 220px);
+  width: clamp(112px, 12.8vw, 176px);
   height: auto;
-  margin-top: 14px;
+  margin-top: 11px;
 }
 
 @media (max-width: 760px) {
@@ -556,9 +556,9 @@ ul {
 }
 
 .hero__title {
-  font-size: clamp(32px, 5vw, 60px);
+  font-size: clamp(26px, 4vw, 48px);
   line-height: 1.15;
-  max-width: 920px;
+  max-width: 736px;
   margin: 0;
   font-weight: 500;
 }
@@ -577,9 +577,9 @@ ul {
 }
 
 .hero__bio {
-  font-size: clamp(18px, 2vw, 26px);
+  font-size: clamp(14px, 1.6vw, 21px);
   line-height: 1.35;
-  max-width: 780px;
+  max-width: 624px;
   margin: 0;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.75);
@@ -588,7 +588,7 @@ ul {
 .cta {
   display: flex;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 /* Black pill with a gradient+noise BORDER (not a filled gradient) — matches
@@ -602,8 +602,8 @@ ul {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  border: 8px solid transparent;
+  gap: 11px;
+  border: 6px solid transparent;
   background-image:
     linear-gradient(var(--bg), var(--bg)),
     var(--noise-bg-strong),
@@ -614,8 +614,8 @@ ul {
   background-repeat: no-repeat, repeat, no-repeat, no-repeat;
   color: var(--white);
   font-family: var(--font-button);
-  font-size: clamp(16px, 1.6vw, 24px);
-  padding: 14px clamp(24px, 3vw, 36px);
+  font-size: clamp(13px, 1.28vw, 19px);
+  padding: 11px clamp(19px, 2.4vw, 29px);
   border-radius: 999px;
   text-decoration: none;
   white-space: nowrap;
@@ -629,24 +629,24 @@ ul {
 }
 
 .cta__button-arrow {
-  width: 20px;
+  width: 16px;
   height: auto;
   transition: transform 0.2s ease;
 }
 
 .cta__button:hover .cta__button-arrow,
 .cta__button:focus-visible .cta__button-arrow {
-  transform: translateX(3px);
+  transform: translateX(2px);
 }
 
 /* ---------- About ---------- */
 .about {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: clamp(40px, 6vw, 100px);
-  max-width: 1200px;
+  gap: clamp(32px, 4.8vw, 80px);
+  max-width: 960px;
   margin: 0 auto;
-  padding: clamp(40px, 6vw, 80px) 24px clamp(60px, 10vw, 140px);
+  padding: clamp(32px, 4.8vw, 64px) 19px clamp(48px, 8vw, 112px);
   align-items: start;
   text-align: left;
 }
@@ -654,27 +654,27 @@ ul {
 .about__eyebrow {
   display: inline-block;
   font-family: var(--font-button);
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 14px;
+  margin-bottom: 11px;
 }
 
 .about__heading {
-  font-size: clamp(28px, 3.4vw, 44px);
+  font-size: clamp(22px, 2.72vw, 35px);
   font-weight: 400;
   line-height: 1.2;
-  margin: 0 0 24px;
+  margin: 0 0 19px;
 }
 
 .about__bio {
-  font-size: clamp(16px, 1.4vw, 19px);
+  font-size: clamp(13px, 1.12vw, 15px);
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.82);
   max-width: 54ch;
-  margin: 0 0 20px;
+  margin: 0 0 16px;
 }
 
 .about__bio:last-child {
@@ -684,22 +684,48 @@ ul {
 .about__skills {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(28px, 3vw, 40px) clamp(20px, 2.6vw, 32px);
+  gap: clamp(22px, 2.4vw, 32px) clamp(16px, 2.08vw, 26px);
+}
+
+.about__skill-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 11px;
 }
 
 .about__skill-group h3 {
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.55);
-  margin: 0 0 14px;
+  margin: 0;
+}
+
+.about__skill-rating {
+  display: inline-flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.about__skill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.about__skill-dot.is-filled {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.85);
 }
 
 .about__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -708,10 +734,10 @@ ul {
 .about__tags li {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 8px 16px;
+  gap: 6px;
+  padding: 6px 13px;
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--white);
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -721,14 +747,14 @@ ul {
    (Figma, code) — the rest are concepts/skills, not products, so a generic
    icon there would look like filler rather than a real identity. */
 .about__tag-icon {
-  width: 14px;
-  height: 14px;
+  width: 11px;
+  height: 11px;
   flex-shrink: 0;
   opacity: 0.85;
 }
 
 .about__tags li:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 860px) {
@@ -748,16 +774,16 @@ ul {
 .work {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(24px, 3vw, 60px);
-  max-width: 1323px;
+  gap: clamp(19px, 2.4vw, 48px);
+  max-width: 1058px;
   margin: 0 auto;
-  padding: clamp(40px, 6vw, 100px) 24px;
+  padding: clamp(32px, 4.8vw, 80px) 19px;
 }
 
 .work__card {
   position: relative;
   background: var(--white);
-  border-radius: 30px;
+  border-radius: 24px;
   aspect-ratio: 401 / 551;
   overflow: hidden;
 }
@@ -803,10 +829,10 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(18px, 2.4vw, 26px);
+  padding: clamp(14px, 1.92vw, 21px);
   background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.32) 42%, transparent 75%);
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(8px);
   transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   pointer-events: none;
 }
@@ -819,16 +845,16 @@ ul {
 
 .work__card-overlay__eyebrow {
   font-family: var(--font-button);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .work__card-overlay__title {
-  font-size: clamp(20px, 2.2vw, 27px);
+  font-size: clamp(16px, 1.76vw, 22px);
   color: var(--white);
   font-weight: 400;
 }
@@ -840,7 +866,7 @@ ul {
   /* .work loses all its own padding below (it becomes a full-viewport sticky
      panel), so without this the pinned cards would butt straight up against
      whatever comes next the instant the pin releases. */
-  margin-bottom: clamp(60px, 8vw, 120px);
+  margin-bottom: clamp(48px, 6.4vw, 96px);
 }
 
 .work-stage--animated .work {
@@ -858,22 +884,22 @@ ul {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(27vw, 340px);
+  width: min(21.6vw, 272px);
   transform: translate(-50%, -50%);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 19px 48px rgba(0, 0, 0, 0.35);
   will-change: transform;
 }
 
 /* ---------- Agent ---------- */
 .agent {
   text-align: center;
-  padding: clamp(70px, 9vw, 140px) 24px clamp(80px, 10vw, 160px);
+  padding: clamp(56px, 7.2vw, 112px) 19px clamp(64px, 8vw, 128px);
 }
 
 .agent__heading {
-  font-size: clamp(20px, 2.6vw, 36px);
-  max-width: 581px;
-  margin: 0 auto clamp(28px, 4vw, 44px);
+  font-size: clamp(16px, 2.08vw, 29px);
+  max-width: 465px;
+  margin: 0 auto clamp(22px, 3.2vw, 35px);
   font-weight: 400;
 }
 
@@ -885,7 +911,7 @@ ul {
   --chat-border: #e5e5ea;
   --chat-ring: rgba(0, 0, 0, 0.12);
   --chat-accent: #f2f2f4;
-  --agent-chat-height: 116px;
+  --agent-chat-height: 93px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -895,19 +921,19 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-top: 18px;
-  max-width: 560px;
+  gap: 8px;
+  margin-top: 14px;
+  max-width: 448px;
 }
 
 .agent-chat__chip {
-  padding: 9px 16px;
+  padding: 7px 13px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 10px;
   cursor: pointer;
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease, border-color 0.2s ease;
 }
@@ -921,19 +947,19 @@ ul {
 
 .agent-chat__attachments {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
-  max-width: 680px;
-  padding: 0 10px 10px;
+  max-width: 544px;
+  padding: 0 8px 8px;
   overflow-x: auto;
 }
 
 .agent-chat__thumb {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 38px;
+  height: 38px;
   flex: none;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--chat-border);
   background: var(--chat-muted-bg);
@@ -950,13 +976,13 @@ ul {
   position: absolute;
   top: 2px;
   right: 2px;
-  width: 16px;
-  height: 16px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.92);
   color: #111;
-  font-size: 11px;
+  font-size: 9px;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -967,10 +993,10 @@ ul {
 .agent-chat__card {
   position: relative;
   width: 100%;
-  max-width: 420px;
-  height: 58px;
+  max-width: 336px;
+  height: 46px;
   margin: 0 auto;
-  border-radius: 28px;
+  border-radius: 22px;
   background: var(--white);
   border: 1px solid var(--chat-border);
   color: var(--chat-fg);
@@ -986,11 +1012,11 @@ ul {
 
 .agent-chat__card:focus-within {
   border-color: rgba(0, 0, 0, 0.25);
-  box-shadow: 0 0 0 3px var(--chat-ring);
+  box-shadow: 0 0 0 2px var(--chat-ring);
 }
 
 .agent-chat__card.is-expanded {
-  max-width: 680px;
+  max-width: 544px;
   height: var(--agent-chat-height);
   overflow: visible;
 }
@@ -1000,11 +1026,11 @@ ul {
   inset: 0;
   display: flex;
   align-items: center;
-  padding: 0 56px 0 24px;
+  padding: 0 45px 0 19px;
   background: none;
   border: none;
   font: inherit;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--chat-muted);
   text-align: left;
@@ -1014,7 +1040,7 @@ ul {
 
 .agent-chat__card.is-expanded .agent-chat__placeholder {
   opacity: 0;
-  transform: translateY(4px);
+  transform: translateY(3px);
   pointer-events: none;
 }
 
@@ -1022,18 +1048,18 @@ ul {
   position: relative;
   display: block;
   width: 100%;
-  height: 88px;
+  height: 70px;
   resize: none;
   border: none;
   outline: none;
   background: transparent;
   font: inherit;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 13px;
+  line-height: 19px;
   color: var(--chat-fg);
-  padding: 18px 56px 18px 24px;
+  padding: 14px 45px 14px 19px;
   opacity: 0;
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease, height 0.2s ease-out;
 }
@@ -1046,14 +1072,14 @@ ul {
 
 .agent-chat__toolbar {
   position: absolute;
-  left: 14px;
-  right: 54px;
-  bottom: 10px;
+  left: 11px;
+  right: 43px;
+  bottom: 8px;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(5px);
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
@@ -1067,14 +1093,14 @@ ul {
 .agent-chat__pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
+  gap: 5px;
+  padding: 5px 10px;
   border-radius: 999px;
   border: none;
   background: transparent;
   color: var(--chat-muted);
   font-family: var(--font-button);
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
@@ -1089,27 +1115,27 @@ ul {
   display: inline-flex;
   align-items: flex-end;
   gap: 2px;
-  height: 14px;
+  height: 11px;
 }
 
 .agent-chat__bars i {
   display: block;
-  width: 3px;
+  width: 2px;
   border-radius: 2px;
   background: currentColor;
   opacity: 0.25;
 }
 
 .agent-chat__bars i:nth-child(1) {
-  height: 6px;
+  height: 5px;
 }
 
 .agent-chat__bars i:nth-child(2) {
-  height: 10px;
+  height: 8px;
 }
 
 .agent-chat__bars i:nth-child(3) {
-  height: 14px;
+  height: 11px;
 }
 
 .agent-chat__bars i.is-active {
@@ -1117,8 +1143,8 @@ ul {
 }
 
 .agent-chat__icon-btn {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   border-radius: 999px;
   border: none;
   background: transparent;
@@ -1141,10 +1167,10 @@ ul {
 
 .agent-chat__send {
   position: absolute;
-  right: 10px;
-  bottom: 10px;
-  width: 38px;
-  height: 38px;
+  right: 8px;
+  bottom: 8px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
   border: none;
   background: var(--chat-muted-bg);
@@ -1172,11 +1198,11 @@ ul {
 }
 
 .agent-chat__note {
-  min-height: 18px;
-  margin: 12px 0 0;
-  font-size: 13px;
+  min-height: 14px;
+  margin: 10px 0 0;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.75);
-  max-width: 480px;
+  max-width: 384px;
 }
 
 .agent-chat__modal {
@@ -1198,10 +1224,10 @@ ul {
 }
 
 .agent-chat__modal img {
-  max-width: min(86vw, 560px);
+  max-width: min(68.8vw, 448px);
   max-height: 78vh;
-  border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 19px 48px rgba(0, 0, 0, 0.4);
   transform: scale(0.92);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -1212,10 +1238,10 @@ ul {
 
 .agent-chat__modal .close {
   position: fixed;
-  top: 16px;
-  right: 16px;
-  width: 36px;
-  height: 36px;
+  top: 13px;
+  right: 13px;
+  width: 29px;
+  height: 29px;
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.92);
@@ -1223,53 +1249,53 @@ ul {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1;
 }
 
 /* ---------- Footer ---------- */
 .footer {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 36px) clamp(28px, 4vw, 44px);
+  padding: clamp(26px, 4vw, 45px) clamp(16px, 3.2vw, 29px) clamp(22px, 3.2vw, 35px);
   display: flex;
   flex-direction: column;
-  gap: clamp(24px, 3vw, 36px);
+  gap: clamp(19px, 2.4vw, 29px);
 }
 
 .footer__eyebrow {
   display: block;
   text-align: center;
   font-family: var(--font-button);
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .footer__tagline {
   margin: 0;
   text-align: center;
   font-family: var(--font-button);
-  font-size: clamp(15px, 1.6vw, 19px);
+  font-size: clamp(12px, 1.28vw, 15px);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .contact-form {
   width: 100%;
-  max-width: 480px;
-  margin: clamp(28px, 4vw, 40px) auto clamp(36px, 5vw, 56px);
+  max-width: 384px;
+  margin: clamp(22px, 3.2vw, 32px) auto clamp(29px, 4vw, 45px);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 11px;
   text-align: left;
 }
 
 .contact-form__row {
   display: flex;
-  gap: 14px;
+  gap: 11px;
 }
 
 .contact-form__row .contact-form__field {
@@ -1280,8 +1306,8 @@ ul {
 .contact-form__field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 13px;
+  gap: 5px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -1289,12 +1315,12 @@ ul {
 .contact-form__field textarea {
   font: inherit;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 11px;
   color: var(--white);
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 12px;
-  padding: 10px 14px;
+  border-radius: 10px;
+  padding: 8px 11px;
   resize: vertical;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
@@ -1311,9 +1337,9 @@ ul {
   background: var(--white);
   color: #000;
   font-family: var(--font-button);
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 500;
-  padding: 12px 28px;
+  padding: 10px 22px;
   border: none;
   border-radius: 999px;
   cursor: pointer;
@@ -1324,12 +1350,12 @@ ul {
 .contact-form__submit:hover,
 .contact-form__submit:focus-visible {
   transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.18);
 }
 
 .contact-form__note {
   margin: 0;
-  font-size: 13px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -1343,7 +1369,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 19px;
 }
 
 .footer__logo {
@@ -1359,14 +1385,14 @@ ul {
 }
 
 .footer__logo img {
-  height: 32px;
+  height: 26px;
   width: auto;
 }
 
 .footer__social {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1381,12 +1407,12 @@ ul {
 
 .footer__social a:hover,
 .footer__social a:focus-visible {
-  transform: translateY(-4px) scale(1.1);
+  transform: translateY(-3px) scale(1.1);
 }
 
 .footer__social img {
-  width: 26px;
-  height: 26px;
+  width: 21px;
+  height: 21px;
   object-fit: contain;
 }
 
@@ -1395,26 +1421,26 @@ ul {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
-  padding-top: clamp(20px, 3vw, 28px);
+  gap: 13px;
+  padding-top: clamp(16px, 2.4vw, 22px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer__copy {
   margin: 0;
-  font-size: 13px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.55);
 }
 
 .footer__links {
   display: flex;
-  gap: clamp(18px, 2vw, 32px);
+  gap: clamp(14px, 1.6vw, 26px);
 }
 
 .footer__links a {
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 11px;
   transition: color 0.2s ease;
 }
 
@@ -1441,7 +1467,7 @@ ul {
 }
 
 [data-reveal="up"] {
-  transform: translateY(28px);
+  transform: translateY(22px);
 }
 
 [data-reveal="fade"] {
@@ -1485,7 +1511,7 @@ ul {
 @media (max-width: 900px) {
   .work {
     grid-template-columns: 1fr;
-    max-width: 420px;
+    max-width: 336px;
   }
 }
 
@@ -1494,7 +1520,7 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    row-gap: 14px;
+    row-gap: 11px;
   }
 
   .nav__start {
@@ -1519,7 +1545,7 @@ ul {
     order: 3;
     flex-basis: 100%;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
   }
 
   .cta {
