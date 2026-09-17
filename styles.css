@@ -184,7 +184,6 @@ ul {
   font-weight: 500;
   padding: 7px clamp(11px, 1.28vw, 16px);
   border-radius: 999px;
-  transform: translate(var(--mx, 0px), var(--my, 0px));
   transition:
     transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     padding 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
@@ -193,7 +192,7 @@ ul {
 
 .nav__agent:hover,
 .nav__agent:focus-visible {
-  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .nav--collapsed .nav__start {
@@ -329,7 +328,6 @@ ul {
   white-space: nowrap;
   padding: 8px clamp(14px, 1.6vw, 21px);
   border-radius: 999px;
-  transform: translate(var(--mx, 0px), var(--my, 0px));
   transition:
     transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.25s ease,
@@ -339,12 +337,12 @@ ul {
 
 .nav__cta:hover,
 .nav__cta:focus-visible {
-  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
+  transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(255, 255, 255, 0.18);
 }
 
 .nav__cta:active {
-  transform: translate(var(--mx, 0px), var(--my, 0px)) scale(0.97);
+  transform: scale(0.97);
 }
 
 /* ---------- Hero ---------- */
@@ -1475,13 +1473,12 @@ ul {
   font-family: var(--font-button);
   font-size: 12px;
   font-weight: 500;
-  transform: translate(var(--mx, 0px), var(--my, 0px));
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .contact-whatsapp:hover,
 .contact-whatsapp:focus-visible {
-  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .contact-whatsapp__icon {
@@ -1557,13 +1554,12 @@ ul {
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  transform: translate(var(--mx, 0px), var(--my, 0px));
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
 }
 
 .contact-form__submit:hover,
 .contact-form__submit:focus-visible {
-  transform: translate(var(--mx, 0px), var(--my, 0px)) translateY(-2px);
+  transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(255, 255, 255, 0.18);
 }
 

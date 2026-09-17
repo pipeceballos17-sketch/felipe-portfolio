@@ -3,7 +3,7 @@
   const isTouch = window.matchMedia("(pointer: coarse)").matches;
   if (prefersReduced || isTouch) return;
 
-  const targets = Array.from(document.querySelectorAll(".cta__button, .nav__cta, .nav__agent, .social-pill a, .contact-form__submit, .contact-whatsapp"));
+  const targets = Array.from(document.querySelectorAll(".cta__button, .social-pill a"));
   if (!targets.length) return;
 
   const STRENGTH = 0.35;
