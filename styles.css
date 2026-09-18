@@ -95,7 +95,7 @@ ul {
   padding: 17px clamp(16px, 3.2vw, 29px);
   border-radius: 0;
   position: sticky;
-  top: 0;
+  top: 8px;
   background-color: var(--bg);
   background-image: var(--noise-bg);
   background-repeat: repeat;
@@ -1053,6 +1053,22 @@ ul {
   aspect-ratio: 1 / 1;
   border-radius: 19px;
   background: var(--placeholder);
+  overflow: hidden;
+}
+
+/* Some source photos (e.g. Gota Fría) have a soft vignette that fades to
+   transparent well beyond a thin edge fringe — against the light gray
+   placeholder color that shows as an obvious "overflow." Swapping to the
+   page's own black background there lets the fade blend in instead. */
+.photos__item:has(img) {
+  background: var(--bg);
+}
+
+.photos__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 760px) {
