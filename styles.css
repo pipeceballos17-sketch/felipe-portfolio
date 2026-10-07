@@ -751,6 +751,12 @@ ul {
   opacity: 0.85;
 }
 
+/* The Figma mark is taller than wide (38:57), so size it by height. */
+.about__tag-icon--figma {
+  width: auto;
+  height: 15px;
+}
+
 .about__tags li:hover {
   transform: translateY(-2px);
 }
