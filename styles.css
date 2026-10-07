@@ -1073,8 +1073,11 @@ ul {
 
 @media (max-width: 760px) {
   .photos__grid {
-/* Glubuddy app screens: phone-sized shots, top-aligned so differing heights read as a masonry-ish row */
+/* Glubuddy app screens: one horizontal row of 5 columns, top-aligned so the
+   differing screen heights hang from the same line. On narrow viewports the
+   row becomes a swipeable strip instead of stacking. */
 .work-screens {
+  width: 100%;
   max-width: 1058px;
   margin: 0 auto;
   padding: 0 19px clamp(48px, 6.4vw, 96px);
@@ -1088,17 +1091,33 @@ ul {
 }
 
 .work-screens__grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: clamp(16px, 2.4vw, 32px);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(12px, 1.8vw, 24px);
 }
 
 .work-screens__grid img {
-  width: min(100%, 240px);
+  width: 100%;
   height: auto;
-  border-radius: 24px;
+  border-radius: clamp(14px, 1.8vw, 22px);
+}
+
+@media (max-width: 760px) {
+  .work-screens__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -19px;
+    padding: 0 19px 12px;
+  }
+
+  .work-screens__grid img {
+    flex: none;
+    width: min(62vw, 240px);
+    scroll-snap-align: center;
+  }
 }
 
     grid-template-columns: repeat(2, 1fr);
