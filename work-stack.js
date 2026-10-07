@@ -16,11 +16,13 @@
     { x: -5, y: -3, rotate: -9, scale: 0.76 },
     { x: 4, y: 2, rotate: 7, scale: 0.8 },
     { x: -1, y: 5, rotate: -3, scale: 0.74 },
+    { x: 2, y: -4, rotate: 5, scale: 0.78 },
   ];
   const END = [
-    { x: -34, y: 0, rotate: -2 },
-    { x: 0, y: 0, rotate: 0 },
-    { x: 34, y: 0, rotate: 2 },
+    { x: -37.5, y: 0, rotate: -3 },
+    { x: -12.5, y: 0, rotate: -1 },
+    { x: 12.5, y: 0, rotate: 1 },
+    { x: 37.5, y: 0, rotate: 3 },
   ];
 
   const lerp = (a, b, t) => a + (b - a) * t;

@@ -771,7 +771,7 @@ ul {
 /* Base: plain static grid. Works with no JS, on touch devices, and with reduced motion. */
 .work {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(19px, 2.4vw, 48px);
   max-width: 1058px;
   margin: 0 auto;
@@ -940,7 +940,7 @@ ul {
 
 .work-index__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(19px, 2.4vw, 48px);
 }
 
