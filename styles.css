@@ -1073,10 +1073,62 @@ ul {
   gap: clamp(12px, 1.8vw, 24px);
 }
 
-.work-screens__grid img {
+.work-screens__grid > img,
+.screen img {
   width: 100%;
   height: auto;
   border-radius: clamp(14px, 1.8vw, 22px);
+}
+
+/* Each app screen explains itself on hover/focus: a dim overlay with a short
+   title and description. Touch devices have no hover, so there the caption
+   sits under the screen instead. */
+.screen {
+  position: relative;
+  margin: 0;
+  border-radius: clamp(14px, 1.8vw, 22px);
+  outline-offset: 4px;
+}
+
+.screen figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 4px 0;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.screen figcaption strong {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+@media (hover: hover) {
+  .screen figcaption {
+    position: absolute;
+    inset: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(12, 12, 12, 0.82);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .screen:hover figcaption,
+  .screen:focus-visible figcaption {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1089,7 +1141,8 @@ ul {
     padding: 0 19px 12px;
   }
 
-  .work-screens__grid img {
+  .work-screens__grid > img,
+  .work-screens__grid > .screen {
     flex: none;
     width: min(62vw, 240px);
     scroll-snap-align: center;
